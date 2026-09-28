@@ -31,7 +31,10 @@ const translations = {
     metricsLabel: 'Journal metrics and indexing', pendingJcr: 'JCR quartile: verification pending', pendingIf: 'Impact factor: verification pending',
     metricsNote: 'Indicators refer to the years shown, not the publication year. IF means Journal Impact Factor; JCR quartiles are category-specific, not CAS divisions. Some values rely on public secondary directories and have not been checked against subscribed JCR. Follow each indicator for its source; Chinese indexing editions are shown where confirmed.',
     aboutTitle: 'Background & experience', aboutIntro: 'Human geography · Chinese Academy of Sciences', career: 'Education & appointments', awards: 'Selected honours', service: 'Academic service',
-    serviceText: 'Journal reviewer for the following journals, as recorded in my September 2026 CV.', contact: 'Contact', cv: 'Download public CV', updated: 'Content updated',
+    serviceText: 'Journal reviewer for the following journals.', contact: 'Contact', updated: 'Content updated',
+    portraitTitle: 'Click to meet me', portraitHints: ['Click the image', 'Press and hold for 2 seconds to see my photo', 'Zhitao Liu'],
+    portraitLabels: ['Avatar: click to reveal a masked dog', 'Masked dog: hold for 2 seconds to reveal my photo', 'Photo of Zhitao Liu'],
+    portraitKeyboard: 'With a keyboard, press Enter or Space once, then hold Enter or Space for 2 seconds. Releasing early cancels the reveal.',
     footer: 'Zhitao Liu · Human Geography', cvTitle: 'Zhitao Liu — Public academic CV'
   },
   zh: {
@@ -48,7 +51,10 @@ const translations = {
     metricsLabel: '期刊指标与收录', pendingJcr: 'JCR 分区待核验', pendingIf: '影响因子待核验',
     metricsNote: '期刊指标采用标签所列年份，并非论文发表当年的指标。IF 为期刊影响因子；JCR 按学科列示，与中科院分区不同。部分数值来自公开二手目录，未经订阅版 JCR 逐项复核。点击标签可查看来源；中文收录仅标注已确认的目录版次。',
     aboutTitle: '教育背景与学术经历', aboutIntro: '人文地理学 · 中国科学院', career: '教育与工作经历', awards: '部分荣誉', service: '学术服务',
-    serviceText: '根据2026年9月个人简历记录，担任以下期刊审稿人。', contact: '联系我', cv: '下载公开版简历', updated: '内容更新',
+    serviceText: '担任以下期刊审稿人。', contact: '联系我', updated: '内容更新',
+    portraitTitle: '点击看本人', portraitHints: ['单击照片', '长按照片2秒，查看本人', '刘志涛'],
+    portraitLabels: ['简笔小人：单击显示蒙面狗', '蒙面狗：长按2秒显示本人照片', '刘志涛本人照片'],
+    portraitKeyboard: '键盘操作：先按一次回车或空格，再按住回车或空格2秒。提前松开会取消。',
     footer: '刘志涛 · 人文地理学', cvTitle: '刘志涛｜公开版学术简历'
   }
 };
@@ -77,7 +83,7 @@ function journalMetrics(p, lang, t) {
       for (const q of groups.values()) badges.push(badge(`JCR ${q.quartile} · ${q.year}${groups.size>1?` · ${q.categories.join(' / ')}`:''}`,q.source,`${q.categories.join('; ')} (${q.year})`));
     } else badges.push(badge(t.pendingJcr));
   } else {
-    for (const idx of journal.indexes || []) badges.push(badge(`${idx.name}${idx.status ? ` ${idx.status[lang] || idx.status}` : ''}${idx.edition?` · ${idx.edition}`:` · ${lang==='zh'?'官网收录说明':'publisher listing'}`}`,idx.source));
+    for (const idx of journal.indexes || []) badges.push(badge(`${idx.name}${idx.status ? ` ${idx.status[lang] || idx.status}` : ''}${idx.edition?` · ${idx.edition}`:''}`,idx.source));
   }
   return `<div class="journal-metrics" aria-label="${t.metricsLabel}">${badges.join('')}</div>`;
 }
@@ -98,10 +104,11 @@ function renderHome(lang, t, prefix) {
 }
 function heading(title, intro, t) { return `<header class="page-heading"><p class="eyebrow">${t.site}</p><h1>${title}</h1><p class="lead">${intro}</p></header>`; }
 function research(lang,t) {
-  const relatedPaper = p => `<li data-paper="${esc(p.id)}">${link(doiURL(p),p.title)}<small>${esc(p.journal)} · ${p.year}</small>${journalMetrics(p,lang,t)}</li>`;
+  const leadFirst = (a,b) => Number(b.role==='lead') - Number(a.role==='lead');
+  const relatedPaper = p => `<li data-paper="${esc(p.id)}" data-role="${p.role}">${link(doiURL(p),p.title)}<small>${esc(p.journal)} · ${p.year}</small><span class="contribution">${esc(p.role==='lead'?t.lead:t.collaboration)}</span>${journalMetrics(p,lang,t)}</li>`;
   return heading(t.researchTitle,t.researchIntro,t)+profile.topics.map((topic,i)=>{
-    const selected = topic.papers.map(doi=>{const p=papers.find(p=>p.doi===doi);if(!p)throw new Error(`Missing related DOI: ${doi}`);return p;});
-    const more = papers.filter(p=>p.topics.includes(topic.id)&&!selected.includes(p)).sort((a,b)=>b.year-a.year);
+    const selected = topic.papers.map(doi=>{const p=papers.find(p=>p.doi===doi);if(!p)throw new Error(`Missing related DOI: ${doi}`);return p;}).sort(leadFirst);
+    const more = papers.filter(p=>p.topics.includes(topic.id)&&!selected.includes(p)).sort((a,b)=>leadFirst(a,b)||b.year-a.year);
     return `<section class="research-block" id="topic-${i+1}"><span class="number">0${i+1}</span><div><h2>${esc(topic.title[lang])}</h2><p>${esc(topic.text[lang])}</p></div><div class="topic-publications"><ul class="related">${selected.map(relatedPaper).join('')}</ul>${more.length?`<details class="more-papers"><summary><span class="when-closed">${t.morePapers} (${more.length})</span><span class="when-open">${t.fewerPapers}</span></summary><ul class="related">${more.map(relatedPaper).join('')}</ul></details>`:''}</div></section>`;
   }).join('')+`<section class="section"><h2>${t.funding}</h2><div class="grant-grid">${profile.grants.map(g=>`<article class="grant"><p>${esc(g.date)}</p><h3>${esc(g.title[lang])}</h3><p>${esc(g.role[lang])}</p></article>`).join('')}</div></section>`;
 }
@@ -109,8 +116,11 @@ function publications(lang,t) {
   const years = [...new Set(papers.map(p=>p.year))].sort((a,b)=>b-a);
   return heading(t.publicationsTitle,t.publicationsIntro,t)+`<div class="note"><p>${t.publicationNote}</p><p>${t.metricsNote}</p></div><div class="publication-layout"><nav class="year-index" aria-label="${t.browseYear}"><p>${t.browseYear}</p>${years.map(year=>link(`#year-${year}`,year)).join('')}</nav><div>${years.map(year=>`<section class="year-group" id="year-${year}"><h2>${year}</h2>${papers.filter(p=>p.year===year).map(p=>paperRow(p,lang,t)).join('')}</section>`).join('')}</div></div>`;
 }
+function portrait(lang,t,prefix) {
+  return `<div class="portrait-reveal" data-stage="0" ${t.portraitHints.map((hint,i)=>`data-hint${i}="${esc(hint)}" data-label${i}="${esc(t.portraitLabels[i])}"`).join(' ')}><p class="portrait-title">${t.portraitTitle}</p><button type="button" class="portrait-button" aria-label="${esc(t.portraitLabels[0])}" aria-describedby="portrait-hint portrait-keyboard"><span class="portrait-frames">${['avatar.png','masked-dog.png','zhitao-liu.jpg'].map((file,i)=>`<img class="portrait-layer" src="${prefix}assets/images/${file}" alt="" width="400" height="400" draggable="false"${i?' hidden':''}>`).join('')}</span><span class="portrait-progress" aria-hidden="true"></span></button><p class="portrait-status" id="portrait-hint" role="status" aria-live="polite">${esc(t.portraitHints[0])}</p><p class="sr-only" id="portrait-keyboard">${t.portraitKeyboard}</p><noscript><p>${lang==='zh'?'开启 JavaScript 后可点击与长按查看照片。':'Enable JavaScript to reveal the photos.'}</p></noscript></div>`;
+}
 function about(lang,t,prefix) {
-  return heading(t.aboutTitle,t.aboutIntro,t)+`<div class="about-layout"><div><p class="intro">${esc(profile.bio[lang])}</p><section><h2>${t.career}</h2><ol class="timeline">${profile.career.map(c=>`<li><time>${esc(c.date)}</time><h3>${esc(c.title[lang])}</h3><p>${esc(c.place[lang])}</p><p>${esc(c.detail[lang])}</p></li>`).join('')}</ol></section><section><h2>${t.awards}</h2><ul class="award-list">${profile.awards.map(a=>`<li><time>${esc(a.date)}</time>${esc(a.title[lang])}</li>`).join('')}</ul></section><section><h2>${t.service}</h2><p>${t.serviceText}</p><ul class="service-list">${profile.reviewJournals.map(j=>`<li>${esc(j)}</li>`).join('')}</ul></section></div><aside><div class="contact-card"><h2>${t.contact}</h2><p>${esc(profile.institution[lang])}</p><p>${link(`mailto:${profile.email}`,profile.email)}</p><div class="links">${link(profile.orcid,'ORCID ↗')}${link(profile.researchgate,'ResearchGate ↗')}${link(profile.github,'GitHub ↗')}${link(`${prefix}files/cv-${lang}.md`,`${t.cv} ↓`)}</div></div></aside></div>`;
+  return heading(t.aboutTitle,t.aboutIntro,t)+`<div class="about-layout"><div><p class="intro">${esc(profile.bio[lang])}</p><section><h2>${t.career}</h2><ol class="timeline">${profile.career.map(c=>`<li><time>${esc(c.date)}</time><h3>${esc(c.title[lang])}</h3><p>${esc(c.place[lang])}</p><p>${esc(c.detail[lang])}</p></li>`).join('')}</ol></section><section><h2>${t.awards}</h2><ul class="award-list">${profile.awards.map(a=>`<li><time>${esc(a.date)}</time>${esc(a.title[lang])}</li>`).join('')}</ul></section><section><h2>${t.service}</h2><p>${t.serviceText}</p><ul class="service-list">${profile.reviewJournals.map(j=>`<li>${esc(j)}</li>`).join('')}</ul></section></div><aside>${portrait(lang,t,prefix)}<div class="contact-card"><h2>${t.contact}</h2><p>${esc(profile.institution[lang])}</p><p>${link(`mailto:${profile.email}`,profile.email)}</p><div class="links">${link(profile.orcid,'ORCID ↗')}${link(profile.researchgate,'ResearchGate ↗')}${link(profile.github,'GitHub ↗')}</div></div></aside></div><script type="module" src="${prefix}assets/portrait.js"></script>`;
 }
 const renderers = { index: renderHome, research, publications, about };
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#142b3b"/><text x="32" y="43" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="35">L</text><path d="M14 51h36" stroke="#78c4a3" stroke-width="3"/></svg>`;
@@ -130,6 +140,9 @@ for (const lang of ['en','zh']) {
   await writeFile(path.join(out,'files',`cv-${lang}.md`),cv);
 }
 await copyFile(path.join(root,'assets','style.css'),path.join(out,'assets','style.css'));
+await copyFile(path.join(root,'assets','portrait.js'),path.join(out,'assets','portrait.js'));
+await mkdir(path.join(out,'assets','images'),{recursive:true});
+for(const file of ['avatar.png','masked-dog.png','zhitao-liu.jpg']) await copyFile(path.join(root,'assets','images',file),path.join(out,'assets','images',file));
 await writeFile(path.join(out,'.nojekyll'),'');
 await writeFile(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
 await writeFile(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['','zh/'].flatMap(lang=>routes.map(r=>`<url><loc>${base}/${lang}${r==='index'?'':r+'.html'}</loc><lastmod>${profile.updated}</lastmod></url>`)).join('')}</urlset>`);

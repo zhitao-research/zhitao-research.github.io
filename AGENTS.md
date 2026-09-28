@@ -4,6 +4,8 @@
 - 所有学术事实来自作者提供或已核验的资料，不虚构论文、项目、指标、数据下载地址或合作关系。
 - 日常内容编辑 `content/profile.json`、`content/publications.json` 和 `content/journals.json`。公开目录 `dist/` 由 `node scripts/build.mjs` 生成，避免手动修改后被覆盖。
 - 网站保留四个栏目，不恢复已删除的数据与代码页。研究方向的常显两篇论文由 profile 指定，其他关联论文按 publications 中的 topics 默认折叠展示。
+- 研究方向论文显示作者角色，一作/通讯排在合作论文前。关于我不提供公开简历下载入口，学术服务不加简历记录的引导语。
+- 关于我联系卡上方使用作者提供的三层图片：点击小人图显示蒙面狗，再长按2秒显示真人；中断长按重新计时，兼容触摸和键盘。修改交互后同时运行 `node --test scripts/portrait.test.mjs`。
 - IF、JCR 分区和中文数据库收录须记录年份及来源，不能以中科院或 SJR 冒充 JCR，也不能把 CSSCI 扩展版写成来源期刊。未核验目录版次保持为空；多学科分区不一致应分别展示。
 - 用户已选择 GitHub Pages，目标账号为 `zhitao-research`，仓库为 `zhitao-research.github.io`。保留该方案，除非用户要求更换。
 - 仅公开学术邮箱；不加入手机号、私人邮箱、凭证或原始私人简历。`CONTENT_REVIEW.md` 为本地维护资料，不提交至公开仓库。

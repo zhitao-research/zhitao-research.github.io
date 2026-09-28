@@ -39,7 +39,7 @@
 
 `topics` 可填一个或多个研究方向：`settlements`（城乡聚落演变）、`ecology`（土地变化与生态环境效应）、`sustainability`（韧性与可持续发展）。每个方向的两篇常显论文仍在 `profile.json` 的 `topics[].papers` 中指定，其余同方向论文自动放入默认收起的列表。各方向允许交叉归类，不能在同一方向内重复。
 
-`journals.json` 按期刊名称集中维护指标，同一期刊的全部论文同步使用该记录。IF 和 JCR 的 `year` 为指标年份，不是报告发布年份；JCR 同时存储学科和来源，多个学科分区不一致时分别展示。中文收录区分 CSSCI 来源/扩展版、CSCD 核心/扩展库；未明确目录年份时 `edition` 保留 `null`，页面显示“官网收录说明”，不能自行补年。Nature Portfolio 仅用于该出版品牌旗下期刊，不泛指 Springer Nature 的所有期刊。
+`journals.json` 按期刊名称集中维护指标，同一期刊的全部论文同步使用该记录。IF 和 JCR 的 `year` 为指标年份，不是报告发布年份；JCR 同时存储学科和来源，多个学科分区不一致时分别展示。中文收录区分 CSSCI 来源/扩展版、CSCD 核心/扩展库；未明确目录年份时 `edition` 保留 `null`，页面不添加后缀，但保留来源链接，不能自行补年。Nature Portfolio 仅用于该出版品牌旗下期刊，不泛指 Springer Nature 的所有期刊。
 
 2026-09-28核对：英文指标以2025年为主，Science of the Total Environment 使用明确标年的2024年历史值。部分 JCR/IF 来自公开二手目录，未经订阅数据库逐项复核；网页可点击每个指标查看来源。中文 CSCD 使用2025–2026目录；地理学报、城市问题的 CSSCI 官方网页没有确认当前目录版次，页面不标该版次。
 
@@ -50,10 +50,19 @@
 ```powershell
 node scripts/build.mjs
 node scripts/check.mjs
+node --test scripts/portrait.test.mjs
 node scripts/serve.mjs
 ```
 
-第三条命令输出一个本地地址；浏览器打开该地址即可预览，中文页面在 `/zh/`。服务器使用临时空闲端口，按 Ctrl+C 停止。也可直接打开 `dist/index.html` 或 `dist/zh/index.html`。网页导航、语言切换与论文链接不依赖 JavaScript。
+最后一条命令输出一个本地地址；浏览器打开该地址即可预览，中文页面在 `/zh/`。服务器默认使用临时空闲端口，也可运行 `node scripts/serve.mjs 8481` 指定本项目常用端口；按 Ctrl+C 停止。网页导航、语言切换、论文链接和折叠列表不依赖 JavaScript；照片交互需要 JavaScript 模块，请通过本地服务器查看。
+
+## 关于我照片与论文排序
+
+- 照片资源位于 `assets/images/`：`avatar.png`、`masked-dog.png`、`zhitao-liu.jpg`，均为作者提供的原始图片。
+- “联系我”上方默认显示小人图，单击显示蒙面狗，再连续长按2秒显示真人照；刷新页面回到第一层。支持鼠标、触摸、回车和空格。短按、移动、离开照片、切换窗口会取消当前长按，不累计计时。
+- 交互由 `assets/portrait.js` 实现，长按逻辑及鼠标/触摸/键盘事件有 `scripts/portrait.test.mjs` 测试；定时测试采用模拟时钟验证1999ms/2000ms边界。
+- 研究方向保留两篇常显论文并显示作者角色；其余列表按第一/通讯作者优先、同角色按年份倒序排列。
+- 关于我页面已移除公开简历下载入口；生成的公开版 Markdown 简历仍保留在 `dist/files/`。
 
 检查覆盖论文必需字段、DOI 重复、页面内部链接、语言路径、公开内容边界和两种语言的论文完整性。此检查不等于外部 DOI 已逐一核验，也不等于视觉检查。
 

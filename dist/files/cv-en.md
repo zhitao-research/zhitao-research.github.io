@@ -83,7 +83,7 @@ I am a postdoctoral researcher in human geography at the Institute of Geographic
 
 ## Academic service
 
-Journal reviewer for the following journals, as recorded in my September 2026 CV.
+Journal reviewer for the following journals.
 
 Nature; Scientific Data; Environmental Impact Assessment Review; Habitat International; Journal of Cleaner Production; Applied Geography; iScience; Finance Research Letters; Environmental and Sustainability Indicators; Transport Policy; Journal of Asian Economics; Research in Transportation Economics; Sustainable Cities and Society; Trees, Forests and People.
 

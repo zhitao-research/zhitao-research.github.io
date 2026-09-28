@@ -29,10 +29,12 @@ for(const topic of profile.topics){
 async function walk(dir){const result=[];for(const name of await readdir(dir)){const file=path.join(dir,name);if((await stat(file)).isDirectory())result.push(...await walk(file));else result.push(file);}return result;}
 const files=await walk(out);let linkCount=0;
 for(const file of files){
+  if(!['.html','.css','.js','.md','.txt','.xml'].includes(path.extname(file)))continue;
   const content=await readFile(file,'utf8');
   assert.ok(!/15626099441|liuzht7@foxmail\.com|C:\\Users|待补充确认|42601369/.test(content),`Private or unconfirmed content leaked: ${file}`);
   if(!file.endsWith('.html'))continue;
   assert.ok(!content.includes('resources.html'),'Retired page is still linked');
+  assert.ok(!/官网收录说明|publisher listing/.test(content),'Removed indexing suffix returned');
   assert.match(content,/<html lang="(?:en|zh-CN)"/);
   const ids=[...content.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length,`Duplicate IDs: ${file}`);
   for(const match of content.matchAll(/(?:href|src)="([^"]+)"/g)){
@@ -41,8 +43,8 @@ for(const file of files){
     let target=ref.startsWith('/')?path.join(out,ref):path.resolve(path.dirname(file),ref||path.basename(file));
     if(ref.endsWith('/'))target=path.join(target,'index.html');
     assert.ok(target===out||target.startsWith(out+path.sep),'Path outside public folder');
-    const targetContent=await readFile(target,'utf8');
-    if(anchor)assert.ok(targetContent.includes(`id="${anchor}"`),`Broken anchor: ${file} -> ${href}`);
+    await access(target);
+    if(anchor)assert.ok((await readFile(target,'utf8')).includes(`id="${anchor}"`),`Broken anchor: ${file} -> ${href}`);
     linkCount++;
   }
 }
@@ -60,9 +62,24 @@ for(const locale of ['','zh/']){
     const actual=[...section.matchAll(/data-paper="([^"]+)"/g)].map(m=>m[1]).sort();
     assert.deepEqual(actual,expected,`Missing/duplicate related papers: ${locale}${topic.id}`);
     assert.equal((section.split('<details')[0].match(/data-paper=/g)||[]).length,2);
+    const entries=[...section.matchAll(/data-paper="([^"]+)" data-role="([^"]+)"/g)];
+    assert.equal(entries.length,expected.length,'Missing role labels');
+    let seenCollaborator=false;
+    for(const [,id,role] of entries){
+      assert.equal(role,papers.find(p=>p.id===id).role);
+      if(role==='collaborator')seenCollaborator=true;
+      else assert.ok(!seenCollaborator,`Lead paper after collaborator: ${topic.id}/${id}`);
+    }
+    assert.equal((section.match(/class="contribution"/g)||[]).length,expected.length);
   }
   const about=await readFile(path.join(out,locale,'about.html'),'utf8');
   assert.ok(about.includes(locale?'<h1>教育背景与学术经历</h1>':'<h1>Background & experience</h1>'));
+  assert.ok(!/Download public CV|下载公开版简历|根据2026年9月个人简历记录|as recorded in my September 2026 CV/.test(about));
+  if(locale)assert.ok(!about.includes('表扬'));
+  assert.ok(about.indexOf('class="portrait-reveal"')<about.indexOf('class="contact-card"'));
+  assert.equal((about.match(/class="portrait-layer"/g)||[]).length,3);
+  assert.equal((about.match(/draggable="false" hidden/g)||[]).length,2);
+  assert.ok(about.includes('type="module"')&&about.includes('assets/portrait.js'));
   await assert.rejects(access(path.join(out,locale,'resources.html')));
 }
 console.log(`PASS: ${papers.length} publication records; ${files.filter(f=>f.endsWith('.html')).length} HTML pages; ${linkCount} local links/anchors; public-content checks.`);

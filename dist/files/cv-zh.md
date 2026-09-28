@@ -75,7 +75,7 @@ ORCID: https://orcid.org/0000-0003-0823-076X
 
 ## 部分荣誉
 
-- 2025 | “2025未来地球：科学与应用大会”优秀报告表扬奖
+- 2025 | “2025未来地球：科学与应用大会”优秀报告奖
 - 2024 | “领跑者5000——中国精品科技期刊顶尖学术论文（F5000）”入选论文
 - 2024 | 中国科学院大学三好学生标兵
 - 2023 | 博士生国家奖学金
@@ -83,7 +83,7 @@ ORCID: https://orcid.org/0000-0003-0823-076X
 
 ## 学术服务
 
-根据2026年9月个人简历记录，担任以下期刊审稿人。
+担任以下期刊审稿人。
 
 Nature; Scientific Data; Environmental Impact Assessment Review; Habitat International; Journal of Cleaner Production; Applied Geography; iScience; Finance Research Letters; Environmental and Sustainability Indicators; Transport Policy; Journal of Asian Economics; Research in Transportation Economics; Sustainable Cities and Society; Trees, Forests and People.
 

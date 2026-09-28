@@ -2,7 +2,9 @@
 
 - 默认使用简体中文沟通。网站同时维护英文根目录和 `zh/` 中文目录。
 - 所有学术事实来自作者提供或已核验的资料，不虚构论文、项目、指标、数据下载地址或合作关系。
-- 日常内容只编辑 `content/profile.json` 和 `content/publications.json`。公开目录 `dist/` 由 `node scripts/build.mjs` 生成，避免手动修改后被覆盖。
+- 日常内容编辑 `content/profile.json`、`content/publications.json` 和 `content/journals.json`。公开目录 `dist/` 由 `node scripts/build.mjs` 生成，避免手动修改后被覆盖。
+- 网站保留四个栏目，不恢复已删除的数据与代码页。研究方向的常显两篇论文由 profile 指定，其他关联论文按 publications 中的 topics 默认折叠展示。
+- IF、JCR 分区和中文数据库收录须记录年份及来源，不能以中科院或 SJR 冒充 JCR，也不能把 CSSCI 扩展版写成来源期刊。未核验目录版次保持为空；多学科分区不一致应分别展示。
 - 用户已选择 GitHub Pages，目标账号为 `zhitao-research`，仓库为 `zhitao-research.github.io`。保留该方案，除非用户要求更换。
 - 仅公开学术邮箱；不加入手机号、私人邮箱、凭证或原始私人简历。`CONTENT_REVIEW.md` 为本地维护资料，不提交至公开仓库。
 - 未确认的国家自然科学基金项目信息暂不公开；不得把未来执行期表述成当前在研。

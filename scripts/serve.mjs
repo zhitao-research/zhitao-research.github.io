@@ -14,4 +14,6 @@ const server=http.createServer(async(req,res)=>{
     res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);
   } catch {res.writeHead(404,{'Content-Type':'text/plain; charset=utf-8'});res.end('Not found');}
 });
-server.listen(0,'127.0.0.1',()=>console.log(`Local: http://127.0.0.1:${server.address().port}`));
+const port=Number(process.argv[2]??0);
+if(!Number.isInteger(port)||port<0||port>65535)throw new Error('Port must be an integer between 0 and 65535');
+server.listen(port,'127.0.0.1',()=>console.log(`Local: http://127.0.0.1:${server.address().port}`));

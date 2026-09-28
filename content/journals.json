@@ -1,0 +1,444 @@
+{
+  "Science China Earth Sciences": {
+    "language": "en",
+    "impactFactor": {
+      "value": 5.5,
+      "year": 2025,
+      "source": "https://link.springer.com/journal/11430",
+      "status": "primary"
+    },
+    "quartiles": [
+      {
+        "category": "Geosciences, Multidisciplinary",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=DXvOYp",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Communications Earth & Environment": {
+    "language": "en",
+    "impactFactor": {
+      "value": 9.3,
+      "year": 2025,
+      "source": "https://www.nature.com/commsenv/",
+      "status": "primary"
+    },
+    "quartiles": [
+      {
+        "category": "Environmental Sciences",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=p363zr",
+        "status": "secondary"
+      },
+      {
+        "category": "Geosciences, Multidisciplinary",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=p363zr",
+        "status": "secondary"
+      },
+      {
+        "category": "Meteorology & Atmospheric Sciences",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=p363zr",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": true,
+    "natureSource": "https://www.nature.com/nature-portfolio/about-journals/journal-metrics",
+    "checkedAt": "2026-09-28"
+  },
+  "Scientific Data": {
+    "language": "en",
+    "impactFactor": {
+      "value": 7.2,
+      "year": 2025,
+      "source": "https://www.nature.com/sdata/journal-impact",
+      "status": "primary"
+    },
+    "quartiles": [
+      {
+        "category": "Multidisciplinary Sciences",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://scholar.pusan.ac.kr/journals/22559/",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": true,
+    "natureSource": "https://www.nature.com/nature-portfolio/about-journals/journal-metrics",
+    "checkedAt": "2026-09-28"
+  },
+  "Geography and Sustainability": {
+    "language": "en",
+    "impactFactor": {
+      "value": 9.8,
+      "year": 2025,
+      "source": "https://igu-online.org/latest-journal-metrics-released-for-the-journal-geography-and-sustainability/",
+      "status": "primary"
+    },
+    "quartiles": [
+      {
+        "category": "Geography, Physical",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://igu-online.org/latest-journal-metrics-released-for-the-journal-geography-and-sustainability/",
+        "status": "primary"
+      },
+      {
+        "category": "Green & Sustainable Science & Technology",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://igu-online.org/latest-journal-metrics-released-for-the-journal-geography-and-sustainability/",
+        "status": "primary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Environmental Impact Assessment Review": {
+    "language": "en",
+    "impactFactor": {
+      "value": 12.2,
+      "year": 2025,
+      "source": "https://www.bioxbio.com/journal/ENVIRON-IMPACT-ASSES",
+      "status": "secondary"
+    },
+    "quartiles": [
+      {
+        "category": "Environmental Studies",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.minicod.com/journals/environmental-impact-assessment-review-4a3e0096",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Journal of Geographical Sciences": {
+    "language": "en",
+    "impactFactor": {
+      "value": 5.7,
+      "year": 2025,
+      "source": "https://link.springer.com/journal/11442",
+      "status": "primary"
+    },
+    "quartiles": [
+      {
+        "category": "Geography, Physical",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=5kXbZD",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Science of the Total Environment": {
+    "language": "en",
+    "impactFactor": {
+      "value": 8,
+      "year": 2024,
+      "source": "https://www.bioxbio.com/journal/SCI-TOTAL-ENVIRON",
+      "status": "secondary"
+    },
+    "quartiles": [
+      {
+        "category": "Environmental Sciences",
+        "quartile": "Q1",
+        "year": 2024,
+        "source": "https://www.scholay.com/journal/1335/science-of-the-total-environment",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Resources, Conservation and Recycling": {
+    "language": "en",
+    "impactFactor": {
+      "value": 10.4,
+      "year": 2025,
+      "source": "https://www.pubmed.com.cn/journal/0921-3449/",
+      "status": "secondary"
+    },
+    "quartiles": [
+      {
+        "category": "Engineering, Environmental",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=r7VMAD",
+        "status": "secondary"
+      },
+      {
+        "category": "Environmental Sciences",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=r7VMAD",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Journal of Cleaner Production": {
+    "language": "en",
+    "impactFactor": {
+      "value": 10.7,
+      "year": 2025,
+      "source": "https://www.bioxbio.com/journal/J-CLEAN-PROD",
+      "status": "secondary"
+    },
+    "quartiles": [
+      {
+        "category": "Engineering, Environmental",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=5dk0Ap",
+        "status": "secondary"
+      },
+      {
+        "category": "Environmental Sciences",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=5dk0Ap",
+        "status": "secondary"
+      },
+      {
+        "category": "Green & Sustainable Science & Technology",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=5dk0Ap",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Habitat International": {
+    "language": "en",
+    "impactFactor": {
+      "value": 8.5,
+      "year": 2025,
+      "source": "https://www.bioxbio.com/journal/HABITAT-INT",
+      "status": "secondary"
+    },
+    "quartiles": [
+      {
+        "category": "Development Studies",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=p6dJlD",
+        "status": "secondary"
+      },
+      {
+        "category": "Environmental Studies",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=p6dJlD",
+        "status": "secondary"
+      },
+      {
+        "category": "Regional & Urban Planning",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=p6dJlD",
+        "status": "secondary"
+      },
+      {
+        "category": "Urban Studies",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=p6dJlD",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Water Research": {
+    "language": "en",
+    "impactFactor": {
+      "value": 12.8,
+      "year": 2025,
+      "source": "https://brujula.ual.es/publications/132257.html?lang=en",
+      "status": "secondary"
+    },
+    "quartiles": [
+      {
+        "category": "Engineering, Environmental",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=rRg9Lp",
+        "status": "secondary"
+      },
+      {
+        "category": "Environmental Sciences",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=rRg9Lp",
+        "status": "secondary"
+      },
+      {
+        "category": "Water Resources",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.ablesci.com/journal/detail?id=rRg9Lp",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Applied Geography": {
+    "language": "en",
+    "impactFactor": {
+      "value": 7.4,
+      "year": 2025,
+      "source": "https://www.bioxbio.com/journal/APPL-GEOGR",
+      "status": "secondary"
+    },
+    "quartiles": [
+      {
+        "category": "Geography",
+        "quartile": "Q1",
+        "year": 2025,
+        "source": "https://www.akaturk.com/journals/27471?lang=en",
+        "status": "secondary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "Sustainability": {
+    "language": "en",
+    "impactFactor": {
+      "value": 4.1,
+      "year": 2025,
+      "source": "https://www.mdpi.com/journal/sustainability?dom=newscred&src=syn",
+      "status": "primary"
+    },
+    "quartiles": [
+      {
+        "category": "Environmental Studies",
+        "quartile": "Q2",
+        "year": 2025,
+        "source": "https://www.mdpi.com/journal/Sustainability/stats",
+        "status": "primary"
+      },
+      {
+        "category": "Environmental Sciences",
+        "quartile": "Q2",
+        "year": 2025,
+        "source": "https://www.mdpi.com/journal/Sustainability/stats",
+        "status": "primary"
+      },
+      {
+        "category": "Green & Sustainable Science & Technology",
+        "quartile": "Q3",
+        "year": 2025,
+        "source": "https://www.mdpi.com/journal/Sustainability/stats",
+        "status": "primary"
+      }
+    ],
+    "naturePortfolio": false,
+    "natureSource": null,
+    "checkedAt": "2026-09-28"
+  },
+  "中国科学：地球科学": {
+    "language": "zh",
+    "checkedAt": "2026-09-28",
+    "indexes": [
+      {
+        "name": "CSCD",
+        "edition": "2025–2026",
+        "status": {
+          "en": "Core",
+          "zh": "核心库"
+        },
+        "source": "https://sciencechina.cn/scichina2/style/sourcelist25_26.pdf"
+      }
+    ]
+  },
+  "地理学报": {
+    "language": "zh",
+    "checkedAt": "2026-09-28",
+    "indexes": [
+      {
+        "name": "CSCD",
+        "edition": "2025–2026",
+        "status": {
+          "en": "Core",
+          "zh": "核心库"
+        },
+        "source": "https://sciencechina.cn/scichina2/style/sourcelist25_26.pdf"
+      },
+      {
+        "name": "CSSCI",
+        "edition": null,
+        "status": {
+          "en": "Source",
+          "zh": "来源期刊"
+        },
+        "source": "https://www.geog.com.cn/CN/column/column15.shtml"
+      }
+    ]
+  },
+  "城市问题": {
+    "language": "zh",
+    "checkedAt": "2026-09-28",
+    "indexes": [
+      {
+        "name": "CSSCI",
+        "edition": null,
+        "status": {
+          "en": "Source",
+          "zh": "来源期刊"
+        },
+        "source": "https://www.bass.org.cn/jgsz/zsjg/202106/t20210621_6480.html"
+      }
+    ]
+  },
+  "热带地理": {
+    "language": "zh",
+    "checkedAt": "2026-09-28",
+    "indexes": [
+      {
+        "name": "CSCD",
+        "edition": "2025–2026",
+        "status": {
+          "en": "Core",
+          "zh": "核心库"
+        },
+        "source": "https://sciencechina.cn/scichina2/style/sourcelist25_26.pdf"
+      },
+      {
+        "name": "CSSCI",
+        "edition": "2025–2026",
+        "status": {
+          "en": "Expanded",
+          "zh": "扩展版"
+        },
+        "source": "https://www.ncpssd.org/journal/details?gch=95558X&langType=1"
+      }
+    ]
+  }
+}

@@ -92,13 +92,9 @@ for(const locale of ['','zh/']){
   assert.ok(about.includes(locale?'<h1>教育背景与学术经历</h1>':'<h1>Background & experience</h1>'));
   assert.ok(!/Download public CV|下载公开版简历|根据2026年9月个人简历记录|as recorded in my September 2026 CV/.test(about));
   if(locale)assert.ok(!about.includes('表扬'));
-  assert.ok(about.indexOf('class="portrait-reveal"')<about.indexOf('class="contact-card"'));
-  assert.equal((about.match(/class="portrait-layer"/g)||[]).length,3);
-  assert.ok(about.includes(locale?'点击查看照片':'Click to view photos'));
-  assert.ok(about.includes('class="portrait-status sr-only"'),'Photo hints must be visually hidden');
-  assert.ok(!about.includes('<noscript>'),'No visible fallback photo hints');
-  assert.equal((about.match(/draggable="false" hidden/g)||[]).length,2);
-  assert.ok(about.includes('type="module"')&&about.includes('assets/portrait.js'));
+  assert.ok(about.includes('class="contact-card"'),'Contact card must remain');
+  assert.ok(!/portrait|点击查看照片|Click to view photos|<img\b/.test(about),'Photo section must not be published');
   await assert.rejects(access(path.join(out,locale,'resources.html')));
 }
+for(const asset of ['portrait.js','images/avatar.png','images/masked-dog.png','images/zhitao-liu.jpg']) await assert.rejects(access(path.join(out,'assets',asset)));
 console.log(`PASS: ${papers.length} publication records; ${files.filter(f=>f.endsWith('.html')).length} HTML pages; ${linkCount} local links/anchors; public-content checks.`);

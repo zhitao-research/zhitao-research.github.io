@@ -50,17 +50,15 @@
 ```powershell
 node scripts/build.mjs
 node scripts/check.mjs
-node --test scripts/portrait.test.mjs
 node scripts/serve.mjs
 ```
 
-最后一条命令输出一个本地地址；浏览器打开该地址即可预览，中文页面在 `/zh/`。服务器默认使用临时空闲端口，也可运行 `node scripts/serve.mjs 8481` 指定本项目常用端口；按 Ctrl+C 停止。网页导航、语言切换、论文链接和折叠列表不依赖 JavaScript；照片交互需要 JavaScript 模块，请通过本地服务器查看。
+最后一条命令输出一个本地地址；浏览器打开该地址即可预览，中文页面在 `/zh/`。服务器默认使用临时空闲端口，也可运行 `node scripts/serve.mjs 8481` 指定本项目常用端口；按 Ctrl+C 停止。网页导航、语言切换、论文链接和折叠列表不依赖 JavaScript。
 
-## 关于我照片与论文排序
+## 版本存档与论文排序
 
-- 照片资源位于 `assets/images/`：`avatar.png`、`masked-dog.png`、`zhitao-liu.jpg`，均为作者提供的原始图片。
-- “联系我”上方默认显示小人图，单击显示蒙面狗，再连续长按2秒显示真人照；刷新页面回到第一层。支持鼠标、触摸、回车和空格。短按、移动、离开照片、切换窗口会取消当前长按，不累计计时。
-- 交互由 `assets/portrait.js` 实现，长按逻辑及鼠标/触摸/键盘事件有 `scripts/portrait.test.mjs` 测试；定时测试采用模拟时钟验证1999ms/2000ms边界。
+- 当前发布无照片版本，关于我页面保留联系卡，不发布照片图片或交互脚本。
+- 含照片版本对应提交 `ba94f7c`，本地标签为 `archive/with-photos-2026-09-28`，完整 ZIP 存档保存在 `.local/archives/with-photos-ba94f7c.zip`（不随网站发布）。
 - 研究方向保留两篇常显论文并显示作者角色；其余列表按第一/通讯作者优先、同角色按年份倒序排列。
 - 关于我页面已移除公开简历下载入口；生成的公开版 Markdown 简历仍保留在 `dist/files/`。
 

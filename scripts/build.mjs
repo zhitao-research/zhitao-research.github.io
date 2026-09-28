@@ -31,9 +31,6 @@ const translations = {
     metricsLabel: 'Journal metrics and indexing', pendingJcr: 'JCR quartile: verification pending', pendingIf: 'Impact factor: verification pending',
     aboutTitle: 'Background & experience', aboutIntro: 'Human geography · Chinese Academy of Sciences', career: 'Education & appointments', awards: 'Selected honours', service: 'Academic service',
     serviceText: 'Journal reviewer for the following journals.', contact: 'Contact', updated: 'Content updated',
-    portraitTitle: 'Click to view photos', portraitHints: ['Click the image', 'Press and hold for 2 seconds to see my photo', 'Zhitao Liu'],
-    portraitLabels: ['Avatar: click to reveal a masked dog', 'Masked dog: hold for 2 seconds to reveal my photo', 'Photo of Zhitao Liu'],
-    portraitKeyboard: 'With a keyboard, press Enter or Space once, then hold Enter or Space for 2 seconds. Releasing early cancels the reveal.',
     footer: 'Zhitao Liu · Human Geography', cvTitle: 'Zhitao Liu — Public academic CV'
   },
   zh: {
@@ -50,9 +47,6 @@ const translations = {
     metricsLabel: '期刊指标与收录', pendingJcr: 'JCR 分区待核验', pendingIf: '影响因子待核验',
     aboutTitle: '教育背景与学术经历', aboutIntro: '人文地理学 · 中国科学院', career: '教育与工作经历', awards: '部分荣誉', service: '学术服务',
     serviceText: '担任以下期刊审稿人。', contact: '联系我', updated: '内容更新',
-    portraitTitle: '点击查看照片', portraitHints: ['单击照片', '长按照片2秒，查看本人', '刘志涛'],
-    portraitLabels: ['简笔小人：单击显示蒙面狗', '蒙面狗：长按2秒显示本人照片', '刘志涛本人照片'],
-    portraitKeyboard: '键盘操作：先按一次回车或空格，再按住回车或空格2秒。提前松开会取消。',
     footer: '刘志涛 · 人文地理学', cvTitle: '刘志涛｜公开版学术简历'
   }
 };
@@ -111,11 +105,8 @@ function publications(lang,t) {
   const years = [...new Set(papers.map(p=>p.year))].sort((a,b)=>b-a);
   return heading(t.publicationsTitle,t.publicationsIntro,t)+`<div class="note"><p>${t.publicationNote}</p></div><div class="publication-layout"><nav class="year-index" aria-label="${t.browseYear}"><p>${t.browseYear}</p>${years.map(year=>link(`#year-${year}`,year)).join('')}</nav><div>${years.map(year=>`<section class="year-group" id="year-${year}"><h2>${year}</h2>${papers.filter(p=>p.year===year).map(p=>paperRow(p,lang,t)).join('')}</section>`).join('')}</div></div>`;
 }
-function portrait(lang,t,prefix) {
-  return `<div class="portrait-reveal" data-stage="0" ${t.portraitHints.map((hint,i)=>`data-hint${i}="${esc(hint)}" data-label${i}="${esc(t.portraitLabels[i])}"`).join(' ')}><p class="portrait-title">${t.portraitTitle}</p><button type="button" class="portrait-button" aria-label="${esc(t.portraitLabels[0])}" aria-describedby="portrait-hint portrait-keyboard"><span class="portrait-frames">${['avatar.png','masked-dog.png','zhitao-liu.jpg'].map((file,i)=>`<img class="portrait-layer" src="${prefix}assets/images/${file}" alt="" width="400" height="400" draggable="false"${i?' hidden':''}>`).join('')}</span><span class="portrait-progress" aria-hidden="true"></span></button><p class="portrait-status sr-only" id="portrait-hint" role="status" aria-live="polite">${esc(t.portraitHints[0])}</p><p class="sr-only" id="portrait-keyboard">${t.portraitKeyboard}</p></div>`;
-}
 function about(lang,t,prefix) {
-  return heading(t.aboutTitle,t.aboutIntro,t)+`<div class="about-layout"><div><p class="intro">${esc(profile.bio[lang])}</p><section><h2>${t.career}</h2><ol class="timeline">${profile.career.map(c=>`<li><time>${esc(c.date)}</time><h3>${esc(c.title[lang])}</h3><p>${esc(c.place[lang])}</p><p>${esc(c.detail[lang])}</p></li>`).join('')}</ol></section><section><h2>${t.awards}</h2><ul class="award-list">${profile.awards.map(a=>`<li><time>${esc(a.date)}</time>${esc(a.title[lang])}</li>`).join('')}</ul></section><section><h2>${t.service}</h2><p>${t.serviceText}</p><ul class="service-list">${profile.reviewJournals.map(j=>`<li>${esc(j)}</li>`).join('')}</ul></section></div><aside>${portrait(lang,t,prefix)}<div class="contact-card"><h2>${t.contact}</h2><p>${esc(profile.institution[lang])}</p><p>${link(`mailto:${profile.email}`,profile.email)}</p><div class="links">${link(profile.orcid,'ORCID ↗')}${link(profile.researchgate,'ResearchGate ↗')}${link(profile.github,'GitHub ↗')}</div></div></aside></div><script type="module" src="${prefix}assets/portrait.js"></script>`;
+  return heading(t.aboutTitle,t.aboutIntro,t)+`<div class="about-layout"><div><p class="intro">${esc(profile.bio[lang])}</p><section><h2>${t.career}</h2><ol class="timeline">${profile.career.map(c=>`<li><time>${esc(c.date)}</time><h3>${esc(c.title[lang])}</h3><p>${esc(c.place[lang])}</p><p>${esc(c.detail[lang])}</p></li>`).join('')}</ol></section><section><h2>${t.awards}</h2><ul class="award-list">${profile.awards.map(a=>`<li><time>${esc(a.date)}</time>${esc(a.title[lang])}</li>`).join('')}</ul></section><section><h2>${t.service}</h2><p>${t.serviceText}</p><ul class="service-list">${profile.reviewJournals.map(j=>`<li>${esc(j)}</li>`).join('')}</ul></section></div><aside><div class="contact-card"><h2>${t.contact}</h2><p>${esc(profile.institution[lang])}</p><p>${link(`mailto:${profile.email}`,profile.email)}</p><div class="links">${link(profile.orcid,'ORCID ↗')}${link(profile.researchgate,'ResearchGate ↗')}${link(profile.github,'GitHub ↗')}</div></div></aside></div>`;
 }
 const renderers = { index: renderHome, research, publications, about };
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#142b3b"/><text x="32" y="43" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="35">L</text><path d="M14 51h36" stroke="#78c4a3" stroke-width="3"/></svg>`;
@@ -135,9 +126,8 @@ for (const lang of ['en','zh']) {
   await writeFile(path.join(out,'files',`cv-${lang}.md`),cv);
 }
 await copyFile(path.join(root,'assets','style.css'),path.join(out,'assets','style.css'));
-await copyFile(path.join(root,'assets','portrait.js'),path.join(out,'assets','portrait.js'));
-await mkdir(path.join(out,'assets','images'),{recursive:true});
-for(const file of ['avatar.png','masked-dog.png','zhitao-liu.jpg']) await copyFile(path.join(root,'assets','images',file),path.join(out,'assets','images',file));
+// Remove retired generated photo assets, including after rebuilding an older checkout.
+for (const file of ['portrait.js','images/avatar.png','images/masked-dog.png','images/zhitao-liu.jpg']) await rm(path.join(out,'assets',file),{force:true});
 await writeFile(path.join(out,'.nojekyll'),'');
 await writeFile(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
 await writeFile(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['','zh/'].flatMap(lang=>routes.map(r=>`<url><loc>${base}/${lang}${r==='index'?'':r+'.html'}</loc><lastmod>${profile.updated}</lastmod></url>`)).join('')}</urlset>`);

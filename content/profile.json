@@ -1,0 +1,41 @@
+{
+  "name": {"en": "Zhitao Liu", "zh": "刘志涛"},
+  "updated": "2026-09-28",
+  "sourceUpdated": "2026-09-10",
+  "email": "liuzt.20b@igsnrr.ac.cn",
+  "github": "https://github.com/zhitao-research",
+  "orcid": "https://orcid.org/0000-0003-0823-076X",
+  "researchgate": "https://www.researchgate.net/profile/Zhitao-Liu-11",
+  "role": {"en": "Postdoctoral Researcher · Human Geography", "zh": "博士后 · 人文地理学"},
+  "institution": {"en": "Institute of Geographic Sciences and Natural Resources Research, Chinese Academy of Sciences", "zh": "中国科学院地理科学与资源研究所"},
+  "intro": {
+    "en": "I study how urban and rural settlements evolve, and what these changes mean for ecosystems and environmental sustainability. My research connects settlement mapping with the ecological consequences of land-use change, from regional patterns to global comparisons.",
+    "zh": "我关注城乡聚落如何演变，以及这些变化如何影响生态系统与环境可持续性。研究将城乡聚落空间识别与土地利用变化的生态环境效应相结合，从区域过程走向全球比较。"
+  },
+  "bio": {
+    "en": "I am a postdoctoral researcher in human geography at the Institute of Geographic Sciences and Natural Resources Research, Chinese Academy of Sciences, working with Prof. Chuanglin Fang. I received my Ph.D. in Human Geography from the University of Chinese Academy of Sciences in 2025, and my bachelor's degree in Human Geography and Urban–Rural Planning from Sun Yat-sen University in 2020.",
+    "zh": "我现为中国科学院地理科学与资源研究所人文地理学博士后，合作导师为方创琳研究员。2025年获中国科学院大学人文地理学博士学位，2020年本科毕业于中山大学人文地理与城乡规划专业。"
+  },
+  "topics": [
+    {"title": {"en": "Urban & rural settlements", "zh": "城乡聚落演变"}, "text": {"en": "Mapping settlement patterns and comparing the spatial and temporal dynamics of urban and rural expansion.", "zh": "识别城乡聚落空间格局，比较城市与乡村扩张的时空特征及响应机制。"}, "papers": ["10.1038/s41597-024-04195-y", "10.11821/dlxb202604006"]},
+    {"title": {"en": "Land change & ecological impacts", "zh": "土地变化与生态环境效应"}, "text": {"en": "Understanding how settlement expansion affects biodiversity, ecosystem services and the ecological environment.", "zh": "理解聚落扩张对生物多样性、生态系统服务和生态环境的影响，探索级联耦合机制。"}, "papers": ["10.1038/s43247-025-03082-7", "10.1007/s11430-025-1844-7"]},
+    {"title": {"en": "Resilience & sustainability", "zh": "韧性与可持续发展"}, "text": {"en": "Exploring urban resilience, environmental governance and integrated frameworks for tracking sustainability.", "zh": "研究城市韧性与环境治理，探索追踪地球可持续性的综合分析框架。"}, "papers": ["10.1016/j.geosus.2023.11.002", "10.1016/j.eiar.2023.107266"]}
+  ],
+  "career": [
+    {"date": "2025.07 —", "title": {"en": "Postdoctoral Researcher", "zh": "博士后"}, "place": {"en": "Institute of Geographic Sciences and Natural Resources Research, CAS", "zh": "中国科学院地理科学与资源研究所"}, "detail": {"en": "Human Geography · Advisor: Prof. Chuanglin Fang", "zh": "人文地理学 · 合作导师：方创琳研究员"}},
+    {"date": "2020.09 — 2025.06", "title": {"en": "Ph.D. in Human Geography", "zh": "人文地理学博士"}, "place": {"en": "University of Chinese Academy of Sciences / IGSNRR, CAS", "zh": "中国科学院大学 / 中国科学院地理科学与资源研究所"}, "detail": {"en": "Advisor: Prof. Chuanglin Fang", "zh": "导师：方创琳研究员"}},
+    {"date": "2016.09 — 2020.06", "title": {"en": "Bachelor's degree", "zh": "学士"}, "place": {"en": "Sun Yat-sen University", "zh": "中山大学地理科学与规划学院"}, "detail": {"en": "Human Geography and Urban–Rural Planning", "zh": "人文地理与城乡规划"}}
+  ],
+  "grants": [
+    {"date": "2025.07 — 2027.06", "title": {"en": "Postdoctoral Innovative Talent Support Program", "zh": "博士后创新人才支持计划"}, "role": {"en": "Principal investigator", "zh": "主持"}},
+    {"date": "2026.01 — 2027.12", "title": {"en": "China Postdoctoral Science Foundation · General Program, 78th round", "zh": "中国博士后科学基金第78批面上资助"}, "role": {"en": "Principal investigator", "zh": "主持"}}
+  ],
+  "awards": [
+    {"date": "2025", "title": {"en": "Outstanding Presentation Commendation, Future Earth: Science and Applications Conference", "zh": "“2025未来地球：科学与应用大会”优秀报告表扬奖"}},
+    {"date": "2024", "title": {"en": "F5000: Top Articles in Outstanding S&T Journals of China", "zh": "“领跑者5000——中国精品科技期刊顶尖学术论文（F5000）”入选论文"}},
+    {"date": "2024", "title": {"en": "Outstanding Merit Student, University of Chinese Academy of Sciences", "zh": "中国科学院大学三好学生标兵"}},
+    {"date": "2023", "title": {"en": "National Scholarship for Doctoral Students", "zh": "博士生国家奖学金"}},
+    {"date": "2017 / 2018", "title": {"en": "National Scholarship for Undergraduate Students", "zh": "本科生国家奖学金"}}
+  ],
+  "reviewJournals": ["Nature", "Scientific Data", "Environmental Impact Assessment Review", "Habitat International", "Journal of Cleaner Production", "Applied Geography", "iScience", "Finance Research Letters", "Environmental and Sustainability Indicators", "Transport Policy", "Journal of Asian Economics", "Research in Transportation Economics", "Sustainable Cities and Society", "Trees, Forests and People"]
+}

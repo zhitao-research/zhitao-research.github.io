@@ -18,6 +18,7 @@ ORCID: https://orcid.org/0000-0003-0823-076X
 
 ## 科研资助
 
+- 2027.01 — 2029.12 | 国家自然科学基金青年项目（C） (2027年启动)
 - 2025.07 — 2027.06 | 博士后创新人才支持计划 (主持)
 - 2026.01 — 2027.12 | 中国博士后科学基金第78批面上资助 (主持)
 
@@ -39,7 +40,7 @@ ORCID: https://orcid.org/0000-0003-0823-076X
 
 - Liu, M., Fang, C., Bai, Y., & Liu, Z. (2025). Unraveling patterns and drivers of urban-rural gap in water consumption sufficiency and efficiency: Evidence from city-level China during 1990–2022. Water Research, 282, 123737. https://doi.org/10.1016/j.watres.2025.123737
 
-- Liu, Z., Huang, S., Fang, C., Guan, L., & Liu, M. (2024). Global urban and rural settlement dataset from 2000 to 2020. Scientific Data, 11, 1359. https://doi.org/10.1038/s41597-024-04195-y
+- Liu, Z.#, Huang, S.#, Fang, C., Guan, L., & Liu, M. (2024). Global urban and rural settlement dataset from 2000 to 2020. Scientific Data, 11, 1359. https://doi.org/10.1038/s41597-024-04195-y
 
 - Fang, C., & Liu, Z.* (2024). Earth vitality: An integrated framework for tracking Earth sustainability. Geography and Sustainability, 5(1), 96–107. https://doi.org/10.1016/j.geosus.2023.11.002
 

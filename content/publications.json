@@ -30,11 +30,11 @@
   {
     "id": "p03",
     "title": "Global urban and rural settlement dataset from 2000 to 2020",
-    "authors": "Liu, Z., Huang, S., Fang, C., Guan, L., & Liu, M.",
+    "authors": "Liu, Z.#, Huang, S.#, Fang, C., Guan, L., & Liu, M.",
     "year": 2024,
     "journal": "Scientific Data",
     "doi": "10.1038/s41597-024-04195-y",
-    "citation": "Liu, Z., Huang, S., Fang, C., Guan, L., & Liu, M. (2024). Global urban and rural settlement dataset from 2000 to 2020. Scientific Data, 11, 1359.",
+    "citation": "Liu, Z.#, Huang, S.#, Fang, C., Guan, L., & Liu, M. (2024). Global urban and rural settlement dataset from 2000 to 2020. Scientific Data, 11, 1359.",
     "role": "lead",
     "featured": true,
     "topics": [

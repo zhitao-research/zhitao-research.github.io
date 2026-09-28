@@ -53,7 +53,23 @@ for(const locale of ['','zh/']){
   assert.equal((html.match(/class="pub"/g)||[]).length,papers.length);
   for(const p of papers)assert.ok(html.includes(`id="${p.id}"`));
   assert.equal((html.match(/class="journal-metrics"/g)||[]).length,papers.length);
+  for (const p of papers) {
+    const article=html.split(`id="${p.id}"`)[1].split('</article>')[0];
+    const quartiles=journals[p.journal].quartiles;
+    if (quartiles?.length) {
+      const year=Math.max(...quartiles.map(q=>Number(q.year)));
+      const best=Math.min(...quartiles.filter(q=>Number(q.year)===year).map(q=>Number(q.quartile.slice(1))));
+      const badges=[...article.matchAll(/>JCR (Q[1-4]) · (\d{4})<\/a>/g)];
+      assert.equal(badges.length,1,`Expected one JCR badge: ${p.id}`);
+      assert.equal(badges[0][1],`Q${best}`);
+      assert.equal(Number(badges[0][2]),year);
+    }
+  }
+  const cofirst=html.split('id="p03"')[1].split('</article>')[0];
+  assert.ok(cofirst.includes('<strong>Liu, Z.</strong>#, Huang, S.#'),'Missing co-first author markers');
   const research=await readFile(path.join(out,locale,'research.html'),'utf8');
+  assert.ok(research.includes(locale?'国家自然科学基金青年项目（C）':'Young Scientists Fund (Category C)'));
+  assert.ok(research.includes(locale?'2027年启动':'Starts in 2027'));
   assert.equal((research.match(/<details class="more-papers">/g)||[]).length,3);
   assert.ok(!/<details[^>]*\bopen\b/.test(research),'Extra publications must start collapsed');
   for(const [i,topic] of profile.topics.entries()){
@@ -78,6 +94,9 @@ for(const locale of ['','zh/']){
   if(locale)assert.ok(!about.includes('表扬'));
   assert.ok(about.indexOf('class="portrait-reveal"')<about.indexOf('class="contact-card"'));
   assert.equal((about.match(/class="portrait-layer"/g)||[]).length,3);
+  assert.ok(about.includes(locale?'点击查看照片':'Click to view photos'));
+  assert.ok(about.includes('class="portrait-status sr-only"'),'Photo hints must be visually hidden');
+  assert.ok(!about.includes('<noscript>'),'No visible fallback photo hints');
   assert.equal((about.match(/draggable="false" hidden/g)||[]).length,2);
   assert.ok(about.includes('type="module"')&&about.includes('assets/portrait.js'));
   await assert.rejects(access(path.join(out,locale,'resources.html')));

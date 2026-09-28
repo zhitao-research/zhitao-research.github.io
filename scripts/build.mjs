@@ -25,14 +25,13 @@ const translations = {
     about: 'About me', more: 'Background & experience', readPaper: 'Read paper',
     researchTitle: 'Research', researchIntro: 'Understanding the evolution of urban and rural settlements and their ecological consequences.',
     funding: 'Research support', publicationsTitle: 'Publications', publicationsIntro: 'Research on settlements, ecological change and sustainability.',
-    publicationNote: 'Publications are listed by bibliographic year. Original titles are retained; Chinese and English versions of related work are listed separately. * Corresponding author.',
+    publicationNote: '* Corresponding author; # Co-first author; IF: Journal Impact Factor; JCR Q1: top 25% by Journal Impact Factor within a subject category. Only the highest quartile is shown for journals in multiple categories.',
     browseYear: 'Browse by year', lead: 'First / corresponding author', collaboration: 'Co-authored',
     morePapers: 'More related publications', fewerPapers: 'Show fewer publications',
     metricsLabel: 'Journal metrics and indexing', pendingJcr: 'JCR quartile: verification pending', pendingIf: 'Impact factor: verification pending',
-    metricsNote: 'Indicators refer to the years shown, not the publication year. IF means Journal Impact Factor; JCR quartiles are category-specific, not CAS divisions. Some values rely on public secondary directories and have not been checked against subscribed JCR. Follow each indicator for its source; Chinese indexing editions are shown where confirmed.',
     aboutTitle: 'Background & experience', aboutIntro: 'Human geography · Chinese Academy of Sciences', career: 'Education & appointments', awards: 'Selected honours', service: 'Academic service',
     serviceText: 'Journal reviewer for the following journals.', contact: 'Contact', updated: 'Content updated',
-    portraitTitle: 'Click to meet me', portraitHints: ['Click the image', 'Press and hold for 2 seconds to see my photo', 'Zhitao Liu'],
+    portraitTitle: 'Click to view photos', portraitHints: ['Click the image', 'Press and hold for 2 seconds to see my photo', 'Zhitao Liu'],
     portraitLabels: ['Avatar: click to reveal a masked dog', 'Masked dog: hold for 2 seconds to reveal my photo', 'Photo of Zhitao Liu'],
     portraitKeyboard: 'With a keyboard, press Enter or Space once, then hold Enter or Space for 2 seconds. Releasing early cancels the reveal.',
     footer: 'Zhitao Liu · Human Geography', cvTitle: 'Zhitao Liu — Public academic CV'
@@ -45,14 +44,13 @@ const translations = {
     about: '关于我', more: '教育与学术经历', readPaper: '阅读论文',
     researchTitle: '研究方向', researchIntro: '理解城乡聚落的演变过程及其生态环境效应。',
     funding: '科研资助', publicationsTitle: '学术论文', publicationsIntro: '围绕城乡聚落、生态环境变化与可持续发展开展研究。',
-    publicationNote: '按书目年份倒序排列，保留论文原始标题；相关研究的中英文版本分别列出。* 表示通讯作者。',
+    publicationNote: '* 表示通讯作者；# 表示共同第一作者；IF 为期刊影响因子；JCR Q1 表示期刊在所属学科中的影响因子排名位于前25%（多学科期刊仅展示最高分区）。',
     browseYear: '按年份浏览', lead: '第一 / 通讯作者', collaboration: '合作论文',
     morePapers: '展开其他相关论文', fewerPapers: '收起其他相关论文',
     metricsLabel: '期刊指标与收录', pendingJcr: 'JCR 分区待核验', pendingIf: '影响因子待核验',
-    metricsNote: '期刊指标采用标签所列年份，并非论文发表当年的指标。IF 为期刊影响因子；JCR 按学科列示，与中科院分区不同。部分数值来自公开二手目录，未经订阅版 JCR 逐项复核。点击标签可查看来源；中文收录仅标注已确认的目录版次。',
     aboutTitle: '教育背景与学术经历', aboutIntro: '人文地理学 · 中国科学院', career: '教育与工作经历', awards: '部分荣誉', service: '学术服务',
     serviceText: '担任以下期刊审稿人。', contact: '联系我', updated: '内容更新',
-    portraitTitle: '点击看本人', portraitHints: ['单击照片', '长按照片2秒，查看本人', '刘志涛'],
+    portraitTitle: '点击查看照片', portraitHints: ['单击照片', '长按照片2秒，查看本人', '刘志涛'],
     portraitLabels: ['简笔小人：单击显示蒙面狗', '蒙面狗：长按2秒显示本人照片', '刘志涛本人照片'],
     portraitKeyboard: '键盘操作：先按一次回车或空格，再按住回车或空格2秒。提前松开会取消。',
     footer: '刘志涛 · 人文地理学', cvTitle: '刘志涛｜公开版学术简历'
@@ -74,13 +72,10 @@ function journalMetrics(p, lang, t) {
     const impact = journal.impactFactor;
     badges.push(impact?.value != null ? badge(`IF ${impact.value} · ${impact.year || (lang==='zh'?'年份待核验':'year unverified')}`, impact.source, impact.note?.[lang] || `${impact.year} Journal Impact Factor`) : badge(t.pendingIf));
     if (journal.quartiles?.length) {
-      const groups = new Map();
-      for (const q of journal.quartiles) {
-        const key = `${q.year}-${q.quartile}`;
-        if (!groups.has(key)) groups.set(key, { ...q, categories: [] });
-        groups.get(key).categories.push(q.category);
-      }
-      for (const q of groups.values()) badges.push(badge(`JCR ${q.quartile} · ${q.year}${groups.size>1?` · ${q.categories.join(' / ')}`:''}`,q.source,`${q.categories.join('; ')} (${q.year})`));
+      const latestYear = Math.max(...journal.quartiles.map(q => Number(q.year)));
+      const best = journal.quartiles.filter(q => Number(q.year) === latestYear)
+        .reduce((a,b) => Number(a.quartile.slice(1)) <= Number(b.quartile.slice(1)) ? a : b);
+      badges.push(badge(`JCR ${best.quartile} · ${best.year}`, best.source, lang==='zh'?'最高 JCR 分区':'Highest JCR quartile'));
     } else badges.push(badge(t.pendingJcr));
   } else {
     for (const idx of journal.indexes || []) badges.push(badge(`${idx.name}${idx.status ? ` ${idx.status[lang] || idx.status}` : ''}${idx.edition?` · ${idx.edition}`:''}`,idx.source));
@@ -110,14 +105,14 @@ function research(lang,t) {
     const selected = topic.papers.map(doi=>{const p=papers.find(p=>p.doi===doi);if(!p)throw new Error(`Missing related DOI: ${doi}`);return p;}).sort(leadFirst);
     const more = papers.filter(p=>p.topics.includes(topic.id)&&!selected.includes(p)).sort((a,b)=>leadFirst(a,b)||b.year-a.year);
     return `<section class="research-block" id="topic-${i+1}"><span class="number">0${i+1}</span><div><h2>${esc(topic.title[lang])}</h2><p>${esc(topic.text[lang])}</p></div><div class="topic-publications"><ul class="related">${selected.map(relatedPaper).join('')}</ul>${more.length?`<details class="more-papers"><summary><span class="when-closed">${t.morePapers} (${more.length})</span><span class="when-open">${t.fewerPapers}</span></summary><ul class="related">${more.map(relatedPaper).join('')}</ul></details>`:''}</div></section>`;
-  }).join('')+`<section class="section"><h2>${t.funding}</h2><div class="grant-grid">${profile.grants.map(g=>`<article class="grant"><p>${esc(g.date)}</p><h3>${esc(g.title[lang])}</h3><p>${esc(g.role[lang])}</p></article>`).join('')}</div></section>`;
+  }).join('')+`<section class="section"><h2>${t.funding}</h2><div class="grant-grid">${profile.grants.map(g=>`<article class="grant"><p>${esc(g.date)}</p><h3>${esc(g.title[lang])}</h3><p>${esc((g.status || g.role)[lang])}</p></article>`).join('')}</div></section>`;
 }
 function publications(lang,t) {
   const years = [...new Set(papers.map(p=>p.year))].sort((a,b)=>b-a);
-  return heading(t.publicationsTitle,t.publicationsIntro,t)+`<div class="note"><p>${t.publicationNote}</p><p>${t.metricsNote}</p></div><div class="publication-layout"><nav class="year-index" aria-label="${t.browseYear}"><p>${t.browseYear}</p>${years.map(year=>link(`#year-${year}`,year)).join('')}</nav><div>${years.map(year=>`<section class="year-group" id="year-${year}"><h2>${year}</h2>${papers.filter(p=>p.year===year).map(p=>paperRow(p,lang,t)).join('')}</section>`).join('')}</div></div>`;
+  return heading(t.publicationsTitle,t.publicationsIntro,t)+`<div class="note"><p>${t.publicationNote}</p></div><div class="publication-layout"><nav class="year-index" aria-label="${t.browseYear}"><p>${t.browseYear}</p>${years.map(year=>link(`#year-${year}`,year)).join('')}</nav><div>${years.map(year=>`<section class="year-group" id="year-${year}"><h2>${year}</h2>${papers.filter(p=>p.year===year).map(p=>paperRow(p,lang,t)).join('')}</section>`).join('')}</div></div>`;
 }
 function portrait(lang,t,prefix) {
-  return `<div class="portrait-reveal" data-stage="0" ${t.portraitHints.map((hint,i)=>`data-hint${i}="${esc(hint)}" data-label${i}="${esc(t.portraitLabels[i])}"`).join(' ')}><p class="portrait-title">${t.portraitTitle}</p><button type="button" class="portrait-button" aria-label="${esc(t.portraitLabels[0])}" aria-describedby="portrait-hint portrait-keyboard"><span class="portrait-frames">${['avatar.png','masked-dog.png','zhitao-liu.jpg'].map((file,i)=>`<img class="portrait-layer" src="${prefix}assets/images/${file}" alt="" width="400" height="400" draggable="false"${i?' hidden':''}>`).join('')}</span><span class="portrait-progress" aria-hidden="true"></span></button><p class="portrait-status" id="portrait-hint" role="status" aria-live="polite">${esc(t.portraitHints[0])}</p><p class="sr-only" id="portrait-keyboard">${t.portraitKeyboard}</p><noscript><p>${lang==='zh'?'开启 JavaScript 后可点击与长按查看照片。':'Enable JavaScript to reveal the photos.'}</p></noscript></div>`;
+  return `<div class="portrait-reveal" data-stage="0" ${t.portraitHints.map((hint,i)=>`data-hint${i}="${esc(hint)}" data-label${i}="${esc(t.portraitLabels[i])}"`).join(' ')}><p class="portrait-title">${t.portraitTitle}</p><button type="button" class="portrait-button" aria-label="${esc(t.portraitLabels[0])}" aria-describedby="portrait-hint portrait-keyboard"><span class="portrait-frames">${['avatar.png','masked-dog.png','zhitao-liu.jpg'].map((file,i)=>`<img class="portrait-layer" src="${prefix}assets/images/${file}" alt="" width="400" height="400" draggable="false"${i?' hidden':''}>`).join('')}</span><span class="portrait-progress" aria-hidden="true"></span></button><p class="portrait-status sr-only" id="portrait-hint" role="status" aria-live="polite">${esc(t.portraitHints[0])}</p><p class="sr-only" id="portrait-keyboard">${t.portraitKeyboard}</p></div>`;
 }
 function about(lang,t,prefix) {
   return heading(t.aboutTitle,t.aboutIntro,t)+`<div class="about-layout"><div><p class="intro">${esc(profile.bio[lang])}</p><section><h2>${t.career}</h2><ol class="timeline">${profile.career.map(c=>`<li><time>${esc(c.date)}</time><h3>${esc(c.title[lang])}</h3><p>${esc(c.place[lang])}</p><p>${esc(c.detail[lang])}</p></li>`).join('')}</ol></section><section><h2>${t.awards}</h2><ul class="award-list">${profile.awards.map(a=>`<li><time>${esc(a.date)}</time>${esc(a.title[lang])}</li>`).join('')}</ul></section><section><h2>${t.service}</h2><p>${t.serviceText}</p><ul class="service-list">${profile.reviewJournals.map(j=>`<li>${esc(j)}</li>`).join('')}</ul></section></div><aside>${portrait(lang,t,prefix)}<div class="contact-card"><h2>${t.contact}</h2><p>${esc(profile.institution[lang])}</p><p>${link(`mailto:${profile.email}`,profile.email)}</p><div class="links">${link(profile.orcid,'ORCID ↗')}${link(profile.researchgate,'ResearchGate ↗')}${link(profile.github,'GitHub ↗')}</div></div></aside></div><script type="module" src="${prefix}assets/portrait.js"></script>`;
@@ -136,7 +131,7 @@ for (const lang of ['en','zh']) {
 <body><a class="skip" href="#main">${t.skip}</a><header class="site-header"><div class="wrap nav-row"><a class="brand" href="index.html">Zhitao Liu <span>刘志涛</span></a><nav class="main-nav" aria-label="${lang==='zh'?'主导航':'Main navigation'}">${routes.map((r,i)=>`<a href="${r}.html"${r===route?' aria-current="page"':''}>${t.nav[i]}</a>`).join('')}</nav><a class="language" href="${alt}" lang="${lang==='zh'?'en':'zh-CN'}" aria-label="${t.langLabel}">${t.language}</a></div></header><main id="main" class="wrap">${renderers[route](lang,t,prefix)}</main><footer class="site-footer"><div class="wrap footer-row"><p>© ${profile.updated.slice(0,4)} ${t.footer}</p><p>${t.updated} ${profile.updated} ${link(profile.github,'GitHub')}${link(`mailto:${profile.email}`,'Email')}</p></div></footer></body></html>`;
     await writeFile(path.join(out,lang==='zh'?'zh':'',`${route}.html`),html);
   }
-  const cv=`# ${t.cvTitle}\n\n${profile.role[lang]}\n\n${profile.institution[lang]}\n\nEmail: ${profile.email}\n\nORCID: ${profile.orcid}\n\n${profile.bio[lang]}\n\n## ${t.career}\n\n${profile.career.map(c=>`- **${c.date} | ${c.title[lang]}** — ${c.place[lang]}. ${c.detail[lang]}`).join('\n')}\n\n## ${t.funding}\n\n${profile.grants.map(g=>`- ${g.date} | ${g.title[lang]} (${g.role[lang]})`).join('\n')}\n\n## ${t.publicationsTitle}\n\n${[...papers].sort((a,b)=>b.year-a.year).map(p=>`- ${p.citation} https://doi.org/${p.doi}`).join('\n\n')}\n\n## ${t.awards}\n\n${profile.awards.map(a=>`- ${a.date} | ${a.title[lang]}`).join('\n')}\n\n## ${t.service}\n\n${t.serviceText}\n\n${profile.reviewJournals.join('; ')}.\n\n${t.updated}: ${profile.updated}\n`;
+  const cv=`# ${t.cvTitle}\n\n${profile.role[lang]}\n\n${profile.institution[lang]}\n\nEmail: ${profile.email}\n\nORCID: ${profile.orcid}\n\n${profile.bio[lang]}\n\n## ${t.career}\n\n${profile.career.map(c=>`- **${c.date} | ${c.title[lang]}** — ${c.place[lang]}. ${c.detail[lang]}`).join('\n')}\n\n## ${t.funding}\n\n${profile.grants.map(g=>`- ${g.date} | ${g.title[lang]} (${(g.status || g.role)[lang]})`).join('\n')}\n\n## ${t.publicationsTitle}\n\n${[...papers].sort((a,b)=>b.year-a.year).map(p=>`- ${p.citation} https://doi.org/${p.doi}`).join('\n\n')}\n\n## ${t.awards}\n\n${profile.awards.map(a=>`- ${a.date} | ${a.title[lang]}`).join('\n')}\n\n## ${t.service}\n\n${t.serviceText}\n\n${profile.reviewJournals.join('; ')}.\n\n${t.updated}: ${profile.updated}\n`;
   await writeFile(path.join(out,'files',`cv-${lang}.md`),cv);
 }
 await copyFile(path.join(root,'assets','style.css'),path.join(out,'assets','style.css'));
